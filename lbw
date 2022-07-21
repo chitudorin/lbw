@@ -1,9 +1,10 @@
 #!/bin/sh
 
-echo "Which unit would you like to use? (kgs/lbs)"
+echo "Which unit do you use for measuring weight? (kgs/lbs)"
 read WEIGHT
 
-
+for WEEK in 1 2 3 4 5
+do
 warmup1() {
 	echo $(echo "scale=2 ; $1/4" | bc)
 }
@@ -17,14 +18,12 @@ normalset() {
 }
 
 
-WEEK=1
-REPS=8
 BENCH=40
 ROW=40
 SQUAT=50
 DEADLIFT=40
 SHOULDER=25
-
+REPS=$(($WEEK + 7))
 
 PLAN="
 
@@ -61,5 +60,7 @@ Shoulder press:
 Set 1:    $(normalset $SHOULDER) $WEIGHT x $REPS
 Set 2:    $(normalset $SHOULDER) $WEIGHT x $REPS
 "
+echo "$PLAN" >> plan
+done
 
-echo "$PLAN" > plan
+
