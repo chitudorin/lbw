@@ -1,0 +1,62 @@
+#!/bin/sh
+
+warmup1() {
+	echo $(echo "scale=2 ; $1/4" | bc)
+}
+
+warmup2() {
+	echo $(echo "scale=2 ; $1/2" | bc)
+}
+
+normalset() {
+	echo $(echo "scale=2 ; $1/1" | bc) 
+}
+
+
+WEEK=1
+WEIGHT=kg
+REPS=8
+BENCH=40
+ROW=40
+SQUAT=50
+DEADLIFT=40
+SHOULDER=25
+
+
+PLAN="
+
+Week $WEEK:
+
+Bench press:
+
+Warmup 1: $(warmup1 $BENCH) $WEIGHT x $REPS
+Warmup 2: $(warmup2 $BENCH) $WEIGHT x $REPS
+Set 1:    $(normalset $BENCH) $WEIGHT x $REPS
+Set 2:    $(normalset $BENCH) $WEIGHT x $REPS
+
+Bent over row:
+
+Warmup 1: $(warmup1 $ROW) $WEIGHT x $REPS
+Warmup 2: $(warmup2 $ROW) $WEIGHT x $REPS
+Set 1:    $(normalset $ROW) $WEIGHT x $REPS
+Set 2:    $(normalset $ROW) $WEIGHT x $REPS
+
+Squat:
+
+Warmup 1: $(warmup1 $SQUAT) $WEIGHT x $REPS
+Warmup 2: $(warmup2 $SQUAT) $WEIGHT x $REPS
+Set 1:    $(normalset $SQUAT) $WEIGHT x $REPS
+Set 2:    $(normalset $SQUAT) $WEIGHT x $REPS
+
+Stiff legged deadlift:
+
+Set 1:    $(normalset $DEADLIFT) $WEIGHT x $REPS
+Set 2:    $(normalset $DEADLIFT) $WEIGHT x $REPS
+
+Shoulder press:
+
+Set 1:    $(normalset $SHOULDER) $WEIGHT x $REPS
+Set 2:    $(normalset $SHOULDER) $WEIGHT x $REPS
+"
+
+echo "$PLAN" > plan
